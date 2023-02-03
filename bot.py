@@ -34,7 +34,7 @@ async def bot_check(bot_username):
         async for message in app.get_chat_history(bot_username, limit=1):
             second_message_id = message.id
         if first_message_id == second_message_id:
-            status = f"\n\n🤖 **Bot**: @{bot_username}\n🔴 Status: **OFF** ❌"
+            status = f"\n\n🤖 **BOT** : @{bot_username}\n🔴 STATUS : **OFF** ❌"
             for bot_admin_id in BOT_ADMIN_IDS:
                 if bot_admin_id.isnumeric():
                     bot_admin_id = int(bot_admin_id)
@@ -43,7 +43,7 @@ async def bot_check(bot_username):
                 except Exception as e:
                     print(e)
         else:
-            status = f"\n\n🤖 **Bot**: @{bot_username}\n🟢 Status: **ON** ✅"
+            status = f"\n\n🤖 **BOT** : @{bot_username}\n🟢 STATUS : **ON** ✅"
         await app.read_chat_history(bot_username)
         return status
     except FloodWait as e:
@@ -51,12 +51,12 @@ async def bot_check(bot_username):
 
 
 async def status_checker():
-    message = f"💡 **Bots Status** 💡\n\n"
+    message = f"**🔗 Wᴇʟᴄᴏᴍᴇ Tᴏ Iɴꜰʟᴇx Bᴏᴛ'ꜱ Sᴛᴀᴛᴜꜱ Cʜᴀɴɴᴇʟ .**\n\n**🔗 Tʜɪꜱ Iꜱ Lɪᴠᴇ Sᴛᴀᴛᴜꜱ Oꜰ Aʟʟ Iɴꜰʟᴇx Bᴏᴛꜱ. Tʜɪꜱ Mᴇꜱꜱᴀɢᴇ Kᴇᴇᴘꜱ Oɴ Uᴘᴅᴀᴛɪɴɢ Iɴ Eᴠᴇʀʏ 60 Mɪɴꜱ Wɪᴛʜ Lɪᴠᴇ Sᴛᴀᴛᴜꜱ Oꜰ Aʟʟ Iɴꜰʟᴇx Bᴏᴛꜱ Wʜᴇᴛʜᴇʀ Tʜᴇʏ Aʀᴇ ON / OFF .**\n\n"
     for bot in BOT_LIST:
         message += await bot_check(bot)
     time = datetime.datetime.now(pytz.timezone(f"{TIME_ZONE}"))
     last_update = time.strftime("%d %b %Y at %I:%M %p")
-    message += f"\n\n🛂 Last Check: {last_update} ({TIME_ZONE})\n\n🟡 **It will be updated every {CHECK_DELAY} Seconds ({int(CHECK_DELAY/60)} Minutes)**"
+    message += f"\n\n🛂 Last Check: {last_update} ({TIME_ZONE})\n\n🟡 **Iᴛ Wɪʟʟ Bᴇ Uᴘᴅᴀᴛᴇᴅ Eᴠᴇʀʏ {CHECK_DELAY} Sᴇᴄᴏɴᴅꜱ ({int(CHECK_DELAY/60)} Mɪɴᴜᴛᴇꜱ)**"
     await app.edit_message_text(int(CHANNEL_OR_GROUP_ID), MESSAGE_ID, message)
     print(f"Last Check: {last_update}")
                         
