@@ -14,7 +14,7 @@ app = Client(
     'BOT',
     API_ID,
     API_HASH,
-    session_string=SESSION_STRING,
+    SESSION_STRING,
     in_memory=True
 )
 
